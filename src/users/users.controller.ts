@@ -1,19 +1,8 @@
-import {
-  BadRequestException,
-  Body,
-  ClassSerializerInterceptor,
-  Controller,
-  Get,
-  Post,
-  UseGuards,
-  UseInterceptors,
-} from '@nestjs/common';
+import { BadRequestException, Body, Controller, Post } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { AuthService } from 'src/auth/auth.service';
-import { CurrentUser } from 'src/auth/current-user.decorator';
-import { AuthGuardJwt } from 'src/auth/guards/auth-guard.jwt';
-import { TodoUser } from 'src/auth/todo-user.entity';
 import { Repository } from 'typeorm';
+import { AuthService } from '../auth/auth.service';
+import { TodoUser } from '../auth/todo-user.entity';
 import { CreateUserDTO } from './dto/create-user.dto';
 
 @Controller('/user')
@@ -72,12 +61,5 @@ export class UserController {
     user.save();
 
     return !!existingUser;
-  }
-
-  @Get('/profile')
-  @UseGuards(AuthGuardJwt)
-  @UseInterceptors(ClassSerializerInterceptor)
-  async getProfile(@CurrentUser() user: TodoUser) {
-    return user;
   }
 }
