@@ -1,3 +1,4 @@
+import { PaginationResult } from 'src/utils/paginator';
 import {
   BaseEntity,
   Column,
@@ -28,10 +29,10 @@ export class Todo extends BaseEntity {
   @Column({ default: false })
   done: boolean;
 
-  @Column({ type: 'date' })
+  @Column({ type: 'date', nullable: true })
   dueTo: Date;
 
-  @Column({ type: 'date' })
+  @Column({ type: 'date', nullable: true })
   reminderOn: Date;
 
   @CreateDateColumn()
@@ -43,3 +44,5 @@ export class Todo extends BaseEntity {
   @ManyToOne(() => TodoUser, (users) => users.todos)
   user: TodoUser;
 }
+
+export type PaginatedTodos = PaginationResult<Todo>;
