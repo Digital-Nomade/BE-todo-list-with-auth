@@ -17,13 +17,9 @@ export class LocalStrategy extends PassportStrategy(Strategy) {
     super();
   }
 
-  public async validate(
-    username: string,
-    email: string,
-    password: string,
-  ): Promise<any> {
+  public async validate(username: string, password: string): Promise<any> {
     const user = await this.userRepository.findOne({
-      where: [{ username }, { email }],
+      where: [{ username }, { email: username }],
     });
 
     if (!user) {
@@ -31,7 +27,9 @@ export class LocalStrategy extends PassportStrategy(Strategy) {
       throw new UnauthorizedException();
     }
 
-    if (!(await bcrypt.compare(password, user.password))) {
+    const samePass = await bcrypt.compare(password, user.password);
+
+    if (!samePass) {
       this.logger.debug(`Password for ${user} doesnt match`);
       throw new UnauthorizedException();
     }
