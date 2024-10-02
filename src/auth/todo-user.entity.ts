@@ -11,8 +11,9 @@ import { Todo } from '../todo/todo.entity';
 
 @Entity()
 export class TodoUser extends BaseEntity {
-  constructor() {
+  constructor(partial?: Partial<TodoUser>) {
     super();
+    Object.assign(this, partial);
   }
 
   @PrimaryGeneratedColumn('uuid')
@@ -57,4 +58,14 @@ export class TodoUser extends BaseEntity {
   @OneToMany(() => Todo, (todo) => todo.user)
   @Expose()
   todos: Event[];
+
+  // @Column({ default: false })
+  // @Expose()
+  // isVerified: boolean;
+
+  // @Column({ type: 'uuid' })
+  // forgotPasswordToken: string;
+
+  // @Column({ type: 'uuid' })
+  // confirmSubscription: string;
 }
