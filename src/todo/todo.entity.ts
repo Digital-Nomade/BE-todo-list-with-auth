@@ -1,4 +1,4 @@
-import { PaginationResult } from 'src/utils/paginator';
+import { PaginationResult } from 'src/pagination/paginator';
 import {
   BaseEntity,
   Column,
