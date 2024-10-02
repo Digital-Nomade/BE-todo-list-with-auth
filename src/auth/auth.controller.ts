@@ -38,4 +38,6 @@ export class AuthController {
 
     return user;
   }
+
+  //TODO: Add routes to forgot password and account confirmation
 }
