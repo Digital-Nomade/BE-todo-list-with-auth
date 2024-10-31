@@ -8,12 +8,14 @@ import {
   UseGuards,
   UseInterceptors,
 } from '@nestjs/common';
+import { ApiTags } from '@nestjs/swagger';
 import { AuthService } from './auth.service';
 import { CurrentUser } from './current-user.decorator';
 import { AuthGuardJwt } from './guards/auth-guard.jwt';
 import { AuthGuardLocal } from './guards/auth-guard.local';
 import { TodoUser } from './todo-user.entity';
 
+@ApiTags('Auth Controller')
 @Controller('auth')
 @SerializeOptions({ strategy: 'excludeAll' })
 export class AuthController {

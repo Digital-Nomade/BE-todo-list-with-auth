@@ -1,12 +1,12 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { DeleteResult, Repository } from 'typeorm';
-import { TodoUser } from '../auth/todo-user.entity';
 import {
-  paginate,
-  PaginateOptions,
-  PaginationResult,
-} from '../pagination/paginator';
+    paginate,
+    PaginateOptions,
+    PaginationResult,
+} from '../../pagination/paginator';
+import { TodoUser } from '../auth/todo-user.entity';
 import { CreateTodo } from './dto/create-todo.dto';
 import { UpdateTodo } from './dto/update-todo.dto';
 import { Todo } from './todo.entity';
